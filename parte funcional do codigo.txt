@@ -1,0 +1,77 @@
+export class HomePage {
+    valor = '0';
+    memoria = '0';
+    operacao = '';
+
+    MostraValor(valor) {
+        if (this.valor == '0') {
+            this.valor = valor;
+        }
+        else {
+            this.valor += valor;
+        }
+    }
+
+    BotaoLimpar() {
+        this.valor = '0';
+        this.memoria = '0';
+        this.operacao = '';
+    }
+
+    BotaoPonto() {
+        if (this.valor.indexOf('.') == -1) {
+            if (this.valor == '0') {
+                this.MostraValor('0.');
+            }
+            else {
+                this.MostraValor('.');
+            }
+        }
+    }
+
+    valorPI() {
+        this.Calcular('');
+        this.valor = (parseFloat(this.valor) * 3.14).toString();
+    }
+    CalculateMatricula() {
+        this.Calcular('');
+        this.valor = (parseFloat(this.valor) * 221072056).toString();
+    }
+
+    Calcular(operacao) {
+        if (this.operacao != '') {
+            if (this.operacao == '+') {
+                this.memoria = (parseFloat(this.memoria) + parseFloat(this.valor)).toString();
+            }
+            else if (this.operacao == '-') {
+                this.memoria = (parseFloat(this.memoria) - parseFloat(this.valor)).toString();
+            }
+            else if (this.operacao == '*') {
+                this.memoria = (parseFloat(this.memoria) * parseFloat(this.valor)).toString();
+            }
+            else if (this.operacao == '/') {
+                if (parseFloat(this.valor) != 0) {
+                    this.memoria = (parseFloat(this.memoria) / parseFloat(this.valor)).toString();
+                }
+            }
+            else if (this.operacao == '^') {
+                this.memoria = (parseFloat(this.memoria) ** parseFloat(this.valor)).toString();
+            }
+            else if (this.operacao == '%') {
+                this.memoria = (parseFloat(this.memoria) * (parseFloat(this.valor) / 100)).toString();
+            }
+        }
+        else {
+            this.memoria = this.valor;
+        }
+        this.operacao = operacao;
+        if (operacao == '') {
+            this.valor = this.memoria;
+            this.memoria = '0';
+        }
+        else {
+            this.valor = '0';
+        }
+    }
+    constructor() { }
+}
